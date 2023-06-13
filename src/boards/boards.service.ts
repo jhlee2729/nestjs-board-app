@@ -1,5 +1,5 @@
 import { CreateBoardDTo } from './dto/create-board.dto';
-import { Board, BoradStatus } from './board.model';
+import { Board, BoardStatus } from './board.model';
 import { Injectable } from '@nestjs/common';
 import { v1 as uuid } from 'uuid';
 
@@ -19,7 +19,7 @@ export class BoardsService {
             id : uuid(),
             title,
             description,
-            status: BoradStatus.PUBLIC
+            status: BoardStatus.PUBLIC
         }
 
         this.boards.push(board);
@@ -32,6 +32,12 @@ export class BoardsService {
 
     deleteBoard(id: string): void {
         this.boards = this.boards.filter((board) => board.id !== id);
+    }
+
+    updateBoardStatus(id: string, status: BoardStatus) : Board {
+        const board = this.getBoardById(id);
+        board.status = status;
+        return board;
     }
 
 }
