@@ -19,8 +19,10 @@ export class BoardsController {
     // }
 
     @Get()
-    getAllBoard(): Promise<Board[]> {
-        return this.boardsService.getAllBoards();
+    getAllBoard(
+        @GetUser() user: User
+    ): Promise<Board[]> {
+        return this.boardsService.getAllBoards(user);
     }
 
     // @Post()
@@ -52,7 +54,7 @@ export class BoardsController {
     deleteBoard(@Param('id', ParseIntPipe) id): Promise<void> {
         return this.boardsService.deleteBoard(id);
     }
-    
+
     // @Delete('/:id')
     // deleteBoard(@Param('id') id: string): void {
     //     this.boardsService.deleteBoard(id);
