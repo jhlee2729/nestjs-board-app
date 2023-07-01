@@ -1,3 +1,4 @@
+import { User } from './../auth/user.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { BoardStatus } from './board-status.enum';
 import { v1 as uuid } from 'uuid';
@@ -38,8 +39,8 @@ export class BoardsService {
     //     return board;
     // }
 
-    createBoard(createBoardDto: CreateBoardDto) : Promise<Board> {
-        return this.boardRepository.createBoard(createBoardDto);
+    createBoard(createBoardDto: CreateBoardDto, user: User) : Promise<Board> {
+        return this.boardRepository.createBoard(createBoardDto, user);
     }
 
     async getBoardById(id: number): Promise <Board> {
